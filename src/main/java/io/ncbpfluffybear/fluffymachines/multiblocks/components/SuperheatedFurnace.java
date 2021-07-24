@@ -5,8 +5,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.ncbpfluffybear.fluffymachines.multiblocks.Foundry;
 import io.ncbpfluffybear.fluffymachines.utils.Constants;
-import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -21,8 +21,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
-import io.ncbpfluffybear.fluffymachines.multiblocks.Foundry;
-import org.apache.commons.lang.WordUtils;
+import net.guizhanss.minecraft.fluffymachines.utils.MetalTypes;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -82,7 +81,7 @@ public class SuperheatedFurnace extends NonHopperableBlock {
         addItemHandler(onBreak());
         addItemSetting(breakOnlyWhenEmpty);
 
-        new BlockMenuPreset(getId(), "&cFoundry") {
+        new BlockMenuPreset(getId(), "&c铸造厂") {
 
             @Override
             public void init() {
@@ -93,9 +92,9 @@ public class SuperheatedFurnace extends NonHopperableBlock {
             public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
                 if (BlockStorage.getLocationInfo(b.getLocation(), "stored") == null) {
 
-                    menu.replaceExistingItem(4, new CustomItem(Material.GUNPOWDER, "&6Dust Available: &e0", "&a> &eLeft Click &ahere to retrieve 1", "&a> &eLeft Click &ahere to retrieve 64"));
-                    menu.replaceExistingItem(7, new CustomItem(Material.IRON_INGOT, "&6Ingots Available: &e0", "&a> &eRight Click &ahere to retrieve 1", "&a> &eLeft Click &ahere to retrieve 64"));
-                    menu.replaceExistingItem(1, new CustomItem(Material.CHEST, "&6Melted Dust: &e0 &7(0%)", "&bType: None",  "&7Stacks: 0"));
+                    menu.replaceExistingItem(4, new CustomItem(Material.GUNPOWDER, "&6可用矿粉: &e0", "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
+                    menu.replaceExistingItem(7, new CustomItem(Material.IRON_INGOT, "&6可用锭: &e0", "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
+                    menu.replaceExistingItem(1, new CustomItem(Material.CHEST, "&6已存储: &e0 &7(0%)", "&b类型: 无",  "&70 组"));
 
                     BlockStorage.addBlockInfo(b, "stored", "0");
                 }
@@ -157,7 +156,7 @@ public class SuperheatedFurnace extends NonHopperableBlock {
                     String type = getBlockInfo(b.getLocation(), "type");
 
                     if (breakOnlyWhenEmpty.getValue() && stored != 0) {
-                        Utils.send(p, "&cThis barrel can't be broken since it has items inside it!");
+                        Utils.send(p, "&c你不能破坏过热熔炉，因为里面还存有物品!");
                         e.setCancelled(true);
                         return;
                     }
@@ -169,7 +168,7 @@ public class SuperheatedFurnace extends NonHopperableBlock {
                     }
 
                     if (itemCount > 5) {
-                        Utils.send(p, "&cPlease remove nearby items before breaking this superheated furnace!");
+                        Utils.send(p, "&c请在破坏此过热熔炉前清理周围的掉落物!");
                         e.setCancelled(true);
                         return;
                     }
@@ -184,8 +183,8 @@ public class SuperheatedFurnace extends NonHopperableBlock {
 
                         if (stored > OVERFLOW_AMOUNT) {
 
-                            Utils.send(p, "&eThere are more than " + OVERFLOW_AMOUNT + " items in this superheated furnace! " +
-                                "Dropping " + OVERFLOW_AMOUNT + " items instead!");
+                            Utils.send(p, "&e过热熔炉内有超过 " + OVERFLOW_AMOUNT + " 个物品! " +
+                                    "仅掉落 " + OVERFLOW_AMOUNT + " 个物品!");
                             int toRemove = OVERFLOW_AMOUNT;
                             while (toRemove >= stackSize) {
 
@@ -350,17 +349,19 @@ public class SuperheatedFurnace extends NonHopperableBlock {
     private void updateIndicator(Block b) {
         BlockMenu inv = BlockStorage.getInventory(b);
         String stored = getBlockInfo(b.getLocation(), "stored");
-        String type = WordUtils.capitalizeFully(getBlockInfo(b.getLocation(), "type"));
+        String type = MetalTypes.get(getBlockInfo(b.getLocation(), "type"));
 
         if (stored.equals("0")) {
             setBlockInfo(b, "type", null);
-            inv.replaceExistingItem(INPUT_INDICATOR, new CustomItem(new ItemStack(Material.CHEST), "&6Melted Dust: &e0 &7(0%)", "&bType: None",  "&7Stacks: 0"));
+            inv.replaceExistingItem(INPUT_INDICATOR, new CustomItem(new ItemStack(Material.CHEST), "&6已存储: &e0 &7(0%)", "&b类型: 无",  "&70 组"));
         } else {
-            inv.replaceExistingItem(INPUT_INDICATOR, new CustomItem(new ItemStack(Material.CHEST), "&6Melted Dust: &e" + stored + " &7(" + Double.parseDouble(stored) / MAX_STORAGE + "%)", "&bType: " + type, "&7Stacks: " + Double.parseDouble(stored) / 64));
+            String percentage = Utils.storageFormat.format(Double.parseDouble(stored) / MAX_STORAGE);
+            String stacks = Utils.powerFormat.format(Double.parseDouble(stored) / 64);
+            inv.replaceExistingItem(INPUT_INDICATOR, new CustomItem(new ItemStack(Material.CHEST), "&6已存储: &e" + stored + " &7(" + percentage + "%)", "&b类型: " + type, "&7" + stacks + " 组"));
 
         }
-        inv.replaceExistingItem(DUST_INDICATOR, new CustomItem(new ItemStack(Material.GUNPOWDER), "&6Dust Available: &e" + stored, "&a> &eLeft Click &ahere to retrieve 1", "&a> &eRight Click &ahere to retrieve 64"));
-        inv.replaceExistingItem(INGOT_INDICATOR, new CustomItem(new ItemStack(Material.IRON_INGOT), "&6Ingots Available: &e" + stored, "&a> &eLeft Click &ahere to retrieve 1", "&a> &eRight Click &ahere to retrieve 64"));
+        inv.replaceExistingItem(DUST_INDICATOR, new CustomItem(new ItemStack(Material.GUNPOWDER), "&6可用矿粉: &e" + stored, "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
+        inv.replaceExistingItem(INGOT_INDICATOR, new CustomItem(new ItemStack(Material.IRON_INGOT), "&6可用锭: &e" + stored, "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
 
 
     }

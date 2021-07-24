@@ -55,7 +55,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
         Config cfg = new Config(this);
 
         if (cfg.getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-            new GitHubBuildsUpdater(this, getFile(), "NCBPFluffyBear/FluffyMachines/master/").start();
+            new GitHubBuildsUpdater(this, getFile(), "ybw0014/FluffyMachines/master/").start();
         }
 
         // Register Glow

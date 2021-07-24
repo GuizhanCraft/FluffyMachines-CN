@@ -135,7 +135,7 @@ public class EnderChestInsertionNode extends SlimefunItem {
                 if (!e.isCancelled()) {
                     BlockStorage.addBlockInfo(b, "owner", p.getUniqueId().toString());
                     BlockStorage.addBlockInfo(b, "playername", p.getDisplayName());
-                    Utils.send(p, "&aEnder Chest Insertion Node registered to " + p.getDisplayName()
+                    Utils.send(p, "&a末影箱输入节点已绑定至玩家 " + p.getDisplayName()
                         + " &7(UUID: " + p.getUniqueId().toString() + ")");
                 }
             }
@@ -146,7 +146,7 @@ public class EnderChestInsertionNode extends SlimefunItem {
         return e -> {
             Player p = e.getPlayer();
             Block b = e.getClickedBlock().get();
-            Utils.send(p, "&eThis Ender Chest Insertion Node belongs to " +
+            Utils.send(p, "&e此末影箱输入节点属于 " +
                 BlockStorage.getLocationInfo(b.getLocation(), "playername")
                 + " &7(UUID: " + BlockStorage.getLocationInfo(b.getLocation(), "owner") + ")");
         };

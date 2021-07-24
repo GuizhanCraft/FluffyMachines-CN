@@ -30,6 +30,8 @@ public final class Utils {
     private static final NamespacedKey fluffykey = new NamespacedKey(FluffyMachines.getInstance(), "fluffykey");
     public static final DecimalFormat powerFormat = new DecimalFormat("###,###.##",
         DecimalFormatSymbols.getInstance(Locale.ROOT));
+    public static final DecimalFormat storageFormat = new DecimalFormat("###.#####",
+            DecimalFormatSymbols.getInstance(Locale.ROOT));
 
     private final static TreeMap<Integer, String> map = new TreeMap<>();
 
@@ -54,11 +56,11 @@ public final class Utils {
     private Utils() {}
 
     public static void send(Player p, String message) {
-        p.sendMessage(ChatColor.GRAY + "[FluffyMachines] " + ChatColors.color(message));
+        p.sendMessage(ChatColor.GRAY + "[蓬松机器] " + ChatColors.color(message));
     }
 
     public static String multiBlockWarning() {
-        return "&cThis is a Multiblock machine!";
+        return "&c这是个多方块结构!";
     }
 
     public static ItemStack buildNonInteractable(Material material, @Nullable String name, @Nullable String... lore) {

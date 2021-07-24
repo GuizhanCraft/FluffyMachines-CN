@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ncbpfluffybear</groupId>
     <artifactId>FluffyMachines</artifactId>
-    <version>1.0.0</version>
+    <version>DEV-87-zh_CN</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -45,7 +45,7 @@
     </repositories>
 
     <build>
-        <finalName>${project.name} v${project.version}</finalName>
+        <finalName>${project.name}-${project.version}</finalName>
         <defaultGoal>clean package</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 

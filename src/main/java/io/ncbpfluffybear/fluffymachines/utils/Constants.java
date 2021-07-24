@@ -20,7 +20,7 @@ public final class Constants {
     public static final String SLIMEFUN_VERSION = SlimefunPlugin.getVersion();
     public static boolean SLIMEFUN_UPDATED = false;
 
-    public static final Pattern VERSION_PATTERN = Pattern.compile("(DEV - )([0-9]+)");
+    public static final Pattern VERSION_PATTERN = Pattern.compile("(DEV-)([0-9]+)(-zh_CN)");
 
     public static final NamespacedKey GLOW_ENCHANT = new NamespacedKey(FluffyMachines.getInstance(),
         "fm_glow_enchant");

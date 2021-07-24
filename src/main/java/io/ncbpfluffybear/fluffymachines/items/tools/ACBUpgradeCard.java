@@ -51,14 +51,14 @@ public class ACBUpgradeCard extends SimpleSlimefunItem<ItemHandler> {
 
             // Make sure the block is an ACB
             if (sfItem == null || sfItem != FluffyItems.ADVANCED_CHARGING_BENCH.getItem()) {
-                Utils.send(e.getPlayer(), "&cYou can only use this card on an Advanced Charging Bench");
+                Utils.send(e.getPlayer(), "&c只能对进阶充电台使用");
                 return;
             }
 
             // Increment the tier by 1
             int tier = Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), "tier"));
             if (tier == 100) {
-                Utils.send(e.getPlayer(), "&cThis Advanced Charging Bench is maxed (Tier 100)");
+                Utils.send(e.getPlayer(), "&c这个进阶充电台已经到达最大等级: 100");
                 return;
             }
             tier++;
@@ -67,7 +67,7 @@ public class ACBUpgradeCard extends SimpleSlimefunItem<ItemHandler> {
             // Remove a card
             card.setAmount(card.getAmount() - 1);
 
-            Utils.send(e.getPlayer(), "&aThis Advanced Charging Bench has been upgraded! &eTier: " + tier);
+            Utils.send(e.getPlayer(), "&a进阶充电台已升级! &e等级: " + tier);
         };
     }
 }

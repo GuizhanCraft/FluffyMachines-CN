@@ -20,6 +20,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import net.guizhanss.minecraft.fluffymachines.utils.StackUtils;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -90,13 +91,13 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
                 if (BlockStorage.getLocationInfo(b.getLocation(), "stored") == null) {
 
                     menu.replaceExistingItem(STATUS_SLOT, new CustomItem(
-                        Material.LIME_STAINED_GLASS_PANE, "&6Items Stored: &e0" + " / " + MAX_STORAGE, "&70%"));
-                    menu.replaceExistingItem(DISPLAY_SLOT, new CustomItem(Material.BARRIER, "&cEmpty"));
+                        Material.LIME_STAINED_GLASS_PANE, "&6已存储物品: &e0" + " / " + MAX_STORAGE, "&70%"));
+                    menu.replaceExistingItem(DISPLAY_SLOT, new CustomItem(Material.BARRIER, "&c空的"));
 
                     BlockStorage.addBlockInfo(b, "stored", "0");
 
                     if (showHologram.getValue()) {
-                        updateHologram(b, "&cEmpty");
+                        updateHologram(b, "&c空的");
                     }
 
                 // Change hologram settings
@@ -112,10 +113,10 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
                 String holo = BlockStorage.getLocationInfo(b.getLocation(), "holo");
                 if (holo == null || holo.equals("true")) {
                     menu.replaceExistingItem(HOLOGRAM_TOGGLE_SLOT,
-                        new CustomItem(Material.QUARTZ_SLAB, "&3Toggle Hologram &a(On)"));
+                        new CustomItem(Material.QUARTZ_SLAB, "&3切换全息投影 &a(打开)"));
                 } else {
                     menu.replaceExistingItem(HOLOGRAM_TOGGLE_SLOT,
-                        new CustomItem(Material.QUARTZ_SLAB, "&3Toggle Hologram &c(Off)"));
+                        new CustomItem(Material.QUARTZ_SLAB, "&3切换全息投影 &c(关闭)"));
                 }
                 menu.addMenuClickHandler(HOLOGRAM_TOGGLE_SLOT, (pl, slot, item, action) -> {
                     toggleHolo(b);
@@ -124,8 +125,8 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
 
                 // Insert all
                 menu.replaceExistingItem(INSERT_ALL_SLOT,
-                    new CustomItem(Material.CYAN_STAINED_GLASS_PANE, "&bInsert All",
-                        "&7> Click here to insert all", "&7compatible items into the barrel"));
+                    new CustomItem(Material.CYAN_STAINED_GLASS_PANE, "&b放入所有",
+                        "&7> 点击此处将所有可用物品放入蓬松桶"));
                 menu.addMenuClickHandler(INSERT_ALL_SLOT, (pl, slot, item, action) -> {
                     insertAll(pl, menu, b);
                     return false;
@@ -133,8 +134,8 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
 
                 // Extract all
                 menu.replaceExistingItem(EXTRACT_ALL_SLOT,
-                    new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&6Extract All",
-                        "&7> Click here to extract", "&7all items to your inventory"));
+                    new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&6取出所有",
+                        "&7> 点击此处取出所有物品"));
                 menu.addMenuClickHandler(EXTRACT_ALL_SLOT, (pl, slot, item, action) -> {
                     extractAll(pl, menu, b);
                     return false;
@@ -182,7 +183,7 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
                     int itemCount = 0;
 
                     if (breakOnlyWhenEmpty.getValue() && stored != 0) {
-                        Utils.send(p, "&cThis barrel can't be broken since it has items inside it!");
+                        Utils.send(p, "&c你不能破坏这个蓬松桶，因为里面还存有物品!");
                         e.setCancelled(true);
                         return;
                     }
@@ -194,7 +195,7 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
                     }
 
                     if (itemCount > 5) {
-                        Utils.send(p, "&cPlease remove nearby items before breaking this barrel!");
+                        Utils.send(p, "&c请在破坏此蓬松桶前清理周围的掉落物!");
                         e.setCancelled(true);
                         return;
                     }
@@ -208,8 +209,8 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
 
                         if (stored > OVERFLOW_AMOUNT) {
 
-                            Utils.send(p, "&eThere are more than " + OVERFLOW_AMOUNT + " items in this barrel! " +
-                                "Dropping " + OVERFLOW_AMOUNT + " items instead!");
+                            Utils.send(p, "&e蓬松桶内有超过 " + OVERFLOW_AMOUNT + " 个物品! " +
+                                "仅掉落 " + OVERFLOW_AMOUNT + " 个物品!");
                             int toRemove = OVERFLOW_AMOUNT;
                             while (toRemove >= stackSize) {
 
@@ -400,14 +401,16 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
         // This helps a bit with lag, but may have visual impacts
         if (inv.hasViewer() || force) {
             inv.replaceExistingItem(STATUS_SLOT, new CustomItem(
-                Material.LIME_STAINED_GLASS_PANE, "&6Items Stored: &e" + stored + " / " + MAX_STORAGE,
-                "&b" + storedStacks + " Stacks &8| &7" + storedPercent + "&7%"));
+                Material.LIME_STAINED_GLASS_PANE, "&6已存储物品: &e" + stored + " / " + MAX_STORAGE,
+                "&b" + storedStacks + " 组 &8| &7" + storedPercent + "&7%"));
         }
 
-        if (inv.getItemInSlot(DISPLAY_SLOT) != null && inv.getItemInSlot(DISPLAY_SLOT).getItemMeta().hasDisplayName()) {
-            itemName = inv.getItemInSlot(DISPLAY_SLOT).getItemMeta().getDisplayName();
+        ItemStack item = inv.getItemInSlot(DISPLAY_SLOT);
+
+        if (inv.getItemInSlot(DISPLAY_SLOT) != null && inv.getItemInSlot(DISPLAY_SLOT).hasItemMeta()) {
+            itemName = StackUtils.getDisplayName(item, item.getItemMeta());
         } else {
-            itemName = WordUtils.capitalizeFully(inv.getItemInSlot(DISPLAY_SLOT).getType().name().replace("_", " "));
+            itemName = StackUtils.getInternalName(item);
         }
 
         if (showHologram.getValue() && (hasHolo == null || hasHolo.equals("true"))) {
@@ -415,9 +418,9 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
         }
 
         if (stored == 0) {
-            inv.replaceExistingItem(DISPLAY_SLOT, new CustomItem(Material.BARRIER, "&cEmpty"));
+            inv.replaceExistingItem(DISPLAY_SLOT, new CustomItem(Material.BARRIER, "&c空的"));
             if (showHologram.getValue() && (hasHolo == null || hasHolo.equals("true"))) {
-                updateHologram(b, "&cEmpty");
+                updateHologram(b, "&c空的");
             }
         }
     }
@@ -433,12 +436,12 @@ public class Barrel extends NonHopperableBlock implements HologramOwner {
         if (toggle == null || toggle.equals("true")) {
             BlockStorage.addBlockInfo(b.getLocation(), "holo", "false");
             menu.replaceExistingItem(HOLOGRAM_TOGGLE_SLOT,
-                new CustomItem(Material.QUARTZ_SLAB, "&3Toggle Hologram &c(Off)"));
+                new CustomItem(Material.QUARTZ_SLAB, "&3切换全息投影 &c(关闭)"));
             removeHologram(b);
         } else {
             BlockStorage.addBlockInfo(b.getLocation(), "holo", "true");
             menu.replaceExistingItem(HOLOGRAM_TOGGLE_SLOT,
-                new CustomItem(Material.QUARTZ_SLAB, "&3Toggle Hologram &a(On)"));
+                new CustomItem(Material.QUARTZ_SLAB, "&3切换全息投影 &a(打开)"));
             updateMenu(b, BlockStorage.getInventory(b), false);
         }
     }

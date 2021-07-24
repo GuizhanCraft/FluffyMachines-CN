@@ -71,7 +71,7 @@ public class AutoTableSaw extends SlimefunItem implements EnergyNetComponent {
             tableSawRecipes.put(new ItemStack(plank), new ItemStack(Material.STICK, 4));
         }
 
-        new BlockMenuPreset(getId(), "&6Auto Table Saw") {
+        new BlockMenuPreset(getId(), "&6自动台锯") {
 
             @Override
             public void init() {
@@ -83,8 +83,8 @@ public class AutoTableSaw extends SlimefunItem implements EnergyNetComponent {
                 if (!BlockStorage.hasBlockInfo(b)
                     || BlockStorage.getLocationInfo(b.getLocation(), "enabled") == null
                     || BlockStorage.getLocationInfo(b.getLocation(), "enabled").equals(String.valueOf(false))) {
-                    menu.replaceExistingItem(6, new CustomItem(Material.GUNPOWDER, "&7Enabled: &4\u2718",
-                        "", "&e> Click to enable this Machine")
+                    menu.replaceExistingItem(6, new CustomItem(Material.GUNPOWDER, "&7启用: &4\u2718",
+                        "", "&e> 点击启用机器")
                     );
                     menu.addMenuClickHandler(6, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", String.valueOf(true));
@@ -92,8 +92,8 @@ public class AutoTableSaw extends SlimefunItem implements EnergyNetComponent {
                         return false;
                     });
                 } else {
-                    menu.replaceExistingItem(6, new CustomItem(Material.REDSTONE, "&7Enabled: &2\u2714",
-                        "", "&e> Click to disable this Machine"));
+                    menu.replaceExistingItem(6, new CustomItem(Material.REDSTONE, "&7启用: &2\u2714",
+                        "", "&e> 点击禁用机器"));
                     menu.addMenuClickHandler(6, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", String.valueOf(false));
                         newInstance(menu, b);
@@ -164,9 +164,8 @@ public class AutoTableSaw extends SlimefunItem implements EnergyNetComponent {
     protected void constructMenu(BlockMenuPreset preset) {
 
         borders(preset, border, inputBorder, outputBorder);
-        preset.addItem(2, new CustomItem(new ItemStack(Material.STONECUTTER), "&eRecipe", "",
-                "&bPut in the Recipe you want to craft",
-                "&4Table Saw Recipes ONLY"
+        preset.addItem(2, new CustomItem(new ItemStack(Material.STONECUTTER), "&e配方",
+                        "", "&b按配方放置物品", "&4仅限台锯配方"
             ),
             ChestMenuUtils.getEmptyClickHandler());
     }
