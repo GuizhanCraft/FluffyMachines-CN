@@ -92,8 +92,8 @@ public class SuperheatedFurnace extends NonHopperableBlock {
             public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
                 if (BlockStorage.getLocationInfo(b.getLocation(), "stored") == null) {
 
-                    menu.replaceExistingItem(4, new CustomItem(Material.GUNPOWDER, "&6可用矿粉: &e0", "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
-                    menu.replaceExistingItem(7, new CustomItem(Material.IRON_INGOT, "&6可用锭: &e0", "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
+                    menu.replaceExistingItem(4, new CustomItem(Material.GUNPOWDER, "&6可用矿粉: &e0", "&a> &e左键点击&a获取1个", "&a> &e右键点击&a获取1组(64个)"));
+                    menu.replaceExistingItem(7, new CustomItem(Material.IRON_INGOT, "&6可用锭: &e0", "&a> &e左键点击&a获取1个", "&a> &e右键点击&a获取1组(64个)"));
                     menu.replaceExistingItem(1, new CustomItem(Material.CHEST, "&6已存储: &e0 &7(0%)", "&b类型: 无",  "&70 组"));
 
                     BlockStorage.addBlockInfo(b, "stored", "0");
@@ -360,8 +360,8 @@ public class SuperheatedFurnace extends NonHopperableBlock {
             inv.replaceExistingItem(INPUT_INDICATOR, new CustomItem(new ItemStack(Material.CHEST), "&6已存储: &e" + stored + " &7(" + percentage + "%)", "&b类型: " + type, "&7" + stacks + " 组"));
 
         }
-        inv.replaceExistingItem(DUST_INDICATOR, new CustomItem(new ItemStack(Material.GUNPOWDER), "&6可用矿粉: &e" + stored, "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
-        inv.replaceExistingItem(INGOT_INDICATOR, new CustomItem(new ItemStack(Material.IRON_INGOT), "&6可用锭: &e" + stored, "&a> &e右键点击&a获取1个", "&a> &e左键点击&a获取1组(64个)"));
+        inv.replaceExistingItem(DUST_INDICATOR, new CustomItem(new ItemStack(Material.GUNPOWDER), "&6可用矿粉: &e" + stored, "&a> &e左键点击&a获取1个", "&a> &e右键点击&a获取1组(64个)"));
+        inv.replaceExistingItem(INGOT_INDICATOR, new CustomItem(new ItemStack(Material.IRON_INGOT), "&6可用锭: &e" + stored, "&a> &e左键点击&a获取1个", "&a> &e右键点击&a获取1组(64个)"));
 
 
     }

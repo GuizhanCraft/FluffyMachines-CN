@@ -316,13 +316,13 @@ public class FluffyItems {
         Material.DIAMOND_PICKAXE,
         "&e&l升级版爆炸镐",
         "",
-        "&7可挖掘5x5x5的范围"
+        "&7可挖掘5x5的范围"
     );
     public static final SlimefunItemStack UPGRADED_EXPLOSIVE_SHOVEL = new SlimefunItemStack("UPGRADED_EXPLOSIVE_SHOVEL",
         Material.DIAMOND_SHOVEL,
         "&e&l升级版爆炸铲",
         "",
-        "&7可挖掘5x5x5的范围"
+        "&7可挖掘5x5的范围"
     );
     public static final SlimefunItemStack FIREPROOF_RUNE = new SlimefunItemStack(
         "FIREPROOF_RUNE",
