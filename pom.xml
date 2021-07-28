@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ncbpfluffybear</groupId>
     <artifactId>FluffyMachines</artifactId>
-    <version>DEV-87-zh_CN</version>
+    <version>DEV-88-zh_CN</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
