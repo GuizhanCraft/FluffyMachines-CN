@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ncbpfluffybear</groupId>
     <artifactId>FluffyMachines</artifactId>
-    <version>DEV-88-zh_CN</version>
+    <version>DEV-88-zh_CN-patch-1</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -157,9 +157,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.Slimefun-Addon-Community</groupId>
+            <groupId>com.github.ybw0014</groupId>
             <artifactId>extrautils</artifactId>
-            <version>cea1be6550</version>
+            <version>921521c111</version>
         </dependency>
 
         <dependency>

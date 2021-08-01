@@ -1,9 +1,9 @@
 package net.guizhanss.minecraft.fluffymachines.utils;
 
-public class MetalTypes {
-    private MetalTypes() {
-    }
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
+public class MetalTypes {
     public static String get(String type) {
         switch (type.toUpperCase()) {
             case "IRON":

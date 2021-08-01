@@ -166,11 +166,11 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
 
     protected void constructMenu(BlockMenuPreset preset) {
         for (int i : plainBorder) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "), (p, slot, item, action) -> false);
+            preset.addItem(i, ChestMenuUtils.getBackground(), (p, slot, item, action) -> false);
         }
 
         for (int i : inputItemBorder) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "), (p, slot, item, action) -> false);
+            preset.addItem(i, ChestMenuUtils.getInputSlotTexture(), (p, slot, item, action) -> false);
         }
 
         for (int i : inputBookBorder) {
@@ -178,7 +178,7 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
         }
 
         for (int i : outputBorder) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE), " "), (p, slot, item, action) -> false);
+            preset.addItem(i, ChestMenuUtils.getOutputSlotTexture(), (p, slot, item, action) -> false);
         }
 
         preset.addItem(PROGRESS_SLOT, progressItem, (p, slot, item, action) -> false);
