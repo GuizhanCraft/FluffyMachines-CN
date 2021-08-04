@@ -4,7 +4,15 @@
 
 可以在 `plugins/Slimefun/Items.yml` 内调整设置。
 
-本仓库插件由 ybw0014 汉化。
+## 下载
+
+点击这里下载 FluffyMachines: [下载 FluffyMachines](https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/maven.yml)
+
+<p align="center">
+  <a href="https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/maven.yml">
+    <img src="https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/maven.yml/badge.svg" alt="Build status"/>
+  </a>
+</p>
 
 ## 机器
 
@@ -75,9 +83,7 @@
 **便携式充电器**: 多个等级的手持版充电站，让玩家可以在任何地方充电。
 
 ## 常见问题 (FAQ)
+
 **铸造厂可以接入货运系统吗?**
+
 *可以的，不过你不能直接对着过热熔炉放置节点。在原本要放置过热熔炉的地方放上箱子，接上货运节点。然后，将箱子替换为过热熔炉即可。*
-
-## 汉化版修改内容
-
-修改了铸造机的百分比与堆叠中显示的小数位数。
