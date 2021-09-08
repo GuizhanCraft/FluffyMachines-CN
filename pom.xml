@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ncbpfluffybear</groupId>
     <artifactId>FluffyMachines</artifactId>
-    <version>DEV-89-zh_CN</version>
+    <version>DEV-90-zh_CN</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -158,8 +158,8 @@
 
         <dependency>
             <groupId>com.github.ybw0014</groupId>
-            <artifactId>extrautils</artifactId>
-            <version>921521c111</version>
+            <artifactId>ExtraUtils</artifactId>
+            <version>bf89aee6ae</version>
         </dependency>
 
         <dependency>
