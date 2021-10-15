@@ -6,15 +6,15 @@
 
 ## 下载
 
-点击这里下载 FluffyMachines: [下载 FluffyMachines](https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/build.yml)
+点击这里下载 FluffyMachines: [下载 FluffyMachines](https://builds.guizhanss.net/ybw0014/FluffyMachines-CN/master)
 
 <p align="center">
   <a href="https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/maven.yml">
     <img src="https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/maven.yml/badge.svg" alt="Java CI"/>
   </a>
 
-  <a href="https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/build.yml">
-    <img src="https://github.com/ybw0014/FluffyMachines-CN/actions/workflows/build.yml/badge.svg" alt="Auto Build"/>
+  <a href="https://builds.guizhanss.net/ybw0014/FluffyMachines-CN/master">
+    <img src="https://builds.guizhanss.net/f/ybw0014/FluffyMachines-CN/master/badge.svg" alt="Build status"/>
   </a>
 </p>
 
