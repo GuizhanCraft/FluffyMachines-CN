@@ -1,28 +1,27 @@
 package io.ncbpfluffybear.fluffymachines.multiblocks.components;
 
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
+import io.ncbpfluffybear.fluffymachines.multiblocks.Foundry;
 import io.ncbpfluffybear.fluffymachines.objects.NonHopperableBlock;
 import io.ncbpfluffybear.fluffymachines.utils.Constants;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
-import io.ncbpfluffybear.fluffymachines.multiblocks.Foundry;
-import net.guizhanss.minecraft.fluffymachines.utils.MetalTypes;
-import org.apache.commons.lang.WordUtils;
+import net.guizhanss.minecraft.chineselib.slimefun.core.Metals;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -350,7 +349,7 @@ public class SuperheatedFurnace extends NonHopperableBlock {
     private void updateIndicator(Block b) {
         BlockMenu inv = BlockStorage.getInventory(b);
         String stored = getBlockInfo(b.getLocation(), "stored");
-        String type = MetalTypes.get(getBlockInfo(b.getLocation(), "type"));
+        String type = Metals.getType(getBlockInfo(b.getLocation(), "type"));
 
         if (stored.equals("0")) {
             setBlockInfo(b, "type", null);

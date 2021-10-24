@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ncbpfluffybear</groupId>
     <artifactId>FluffyMachines</artifactId>
-    <version>DEV-90-zh_CN</version>
+    <version>UNOFFICIAL</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -80,8 +80,15 @@
                             </excludes>
                         </relocation>
                         <relocation>
-                            <pattern>com.github.Slimefun-Addon-Community.extrautils</pattern>
+                            <pattern>dev.j3fftw.extrautils</pattern>
                             <shadedPattern>io.ncbpfluffybear.fluffymachines.extrautils</shadedPattern>
+                            <excludes>
+                                <exclude>META-INF/*.MF</exclude>
+                            </excludes>
+                        </relocation>
+                        <relocation>
+                            <pattern>net.guizhanss.minecraft.chineselib</pattern>
+                            <shadedPattern>io.ncbpfluffybear.fluffymachines.chineselib</shadedPattern>
                             <excludes>
                                 <exclude>META-INF/*.MF</exclude>
                             </excludes>
@@ -167,6 +174,13 @@
             <artifactId>nocheatplus</artifactId>
             <version>3.16.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ybw0014</groupId>
+            <artifactId>ChineseLib</artifactId>
+            <version>0.2.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
