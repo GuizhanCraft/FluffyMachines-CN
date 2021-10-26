@@ -117,27 +117,29 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
         }
 
         // Get Slimefun Numerical Version
-        try {
-            Matcher matcher = Constants.VERSION_PATTERN.matcher(Constants.SLIMEFUN_VERSION);
-            if (matcher.find()) {
-                int parsedVersion = Integer.parseInt(matcher.group(2));
-                if (parsedVersion < 844) {
-                    getLogger().log(Level.INFO, ChatColor.YELLOW + "You are running a Slimefun version before DEV 844. " +
-                        "FluffyMachines requires you to update your Slimefun version so that barrels remain functional. " +
-                        "Update before 4/15/2021, or players may encounter issues with FluffyMachines that " +
-                        "I am not accountable for.");
-                } else {
-                    Constants.SLIMEFUN_UPDATED = true;
-                }
-            } else {
-                getLogger().log(Level.INFO, ChatColor.YELLOW + "You are running a RC version of Slimefun " +
-                    "or running a custom build. FluffyMachines requires you to update your Slimefun version so that " +
-                    "barrels remain functional. Update before 4/15/2021, or players may encounter issues with " +
-                    "FluffyMachines that I am not accountable for");
-            }
-        } catch (NumberFormatException e) {
-            return;
-        }
+//        try {
+//            Matcher matcher = Constants.VERSION_PATTERN.matcher(Constants.SLIMEFUN_VERSION);
+//            if (matcher.find()) {
+//                int parsedVersion = Integer.parseInt(matcher.group(2));
+//                if (parsedVersion < 844) {
+//                    getLogger().log(Level.INFO, ChatColor.YELLOW + "You are running a Slimefun version before DEV 844. " +
+//                        "FluffyMachines requires you to update your Slimefun version so that barrels remain functional. " +
+//                        "Update before 4/15/2021, or players may encounter issues with FluffyMachines that " +
+//                        "I am not accountable for.");
+//                } else {
+//                    Constants.SLIMEFUN_UPDATED = true;
+//                }
+//            } else {
+//                getLogger().log(Level.INFO, ChatColor.YELLOW + "You are running a RC version of Slimefun " +
+//                    "or running a custom build. FluffyMachines requires you to update your Slimefun version so that " +
+//                    "barrels remain functional. Update before 4/15/2021, or players may encounter issues with " +
+//                    "FluffyMachines that I am not accountable for");
+//            }
+//        } catch (NumberFormatException e) {
+//            return;
+//        }
+        // 此处默认使用新版本
+        Constants.SLIMEFUN_UPDATED = true;
 
         // Registering Items
         FluffyItemSetup.setup(this);
@@ -147,10 +149,10 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
 
         final Metrics metrics = new Metrics(this, 8927);
 
-        getLogger().log(Level.INFO, ChatColor.GREEN + "Hi there! Want to share your server with the " +
-            "Slimefun community?");
-        getLogger().log(Level.INFO, ChatColor.GREEN + "Join the official Slimefun Discord server at " +
-            "https://discord.gg/slimefun");
+//        getLogger().log(Level.INFO, ChatColor.GREEN + "Hi there! Want to share your server with the " +
+//            "Slimefun community?");
+//        getLogger().log(Level.INFO, ChatColor.GREEN + "Join the official Slimefun Discord server at " +
+//            "https://discord.gg/slimefun");
     }
 
     @Override
@@ -163,7 +165,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
                              String[] args) {
 
         if (args.length == 0) {
-            sender.sendMessage("FluffyMachines > Gotta be longer than that");
+            sender.sendMessage("蓬松机器 > 无效的指令");
             return true;
         }
         if (args[0].equalsIgnoreCase("replace") && sender instanceof Player) {
@@ -197,7 +199,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
             Player p = (Player) sender;
 
             if (args.length != 3) {
-                Utils.send(p, "&cPlease specify the key and the data");
+                Utils.send(p, "&c需要指定键和值");
 
             } else {
                 RayTraceResult rayResult = p.rayTraceBlocks(5d);
@@ -205,10 +207,10 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
                     && BlockStorage.hasBlockInfo(rayResult.getHitBlock())) {
 
                     BlockStorage.addBlockInfo(rayResult.getHitBlock(), args[1], args[2]);
-                    Utils.send(p, "&aInfo has been added.");
+                    Utils.send(p, "&a信息已添加.");
 
                 } else {
-                    Utils.send(p, "&cYou must be looking at a Slimefun block");
+                    Utils.send(p, "&c你必须看向一个Slimefun方块");
                 }
             }
             return true;
@@ -229,7 +231,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
         }
 
         if (players > 0) {
-            Bukkit.getLogger().log(Level.INFO, "Auto-saved all player data for {0} player(s)!", players);
+            Bukkit.getLogger().log(Level.INFO, "已自动保存 {0} 位玩家的数据!", players);
         }
     }
 
@@ -247,7 +249,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/NCBPFluffyBear/FluffyMachines/issues";
+        return "https://github.com/ybw0014/FluffyMachines-CN/issues";
     }
 
     @Nonnull
