@@ -71,6 +71,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
                 <configuration>
+                    <minimizeJar>true</minimizeJar>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
@@ -87,8 +88,8 @@
                             </excludes>
                         </relocation>
                         <relocation>
-                            <pattern>net.guizhanss.minecraft.chineselib</pattern>
-                            <shadedPattern>io.ncbpfluffybear.fluffymachines.chineselib</shadedPattern>
+                            <pattern>net.guizhanss.minecraft.guizhanlib</pattern>
+                            <shadedPattern>io.ncbpfluffybear.fluffymachines.guizhanlib</shadedPattern>
                             <excludes>
                                 <exclude>META-INF/*.MF</exclude>
                             </excludes>
@@ -179,7 +180,7 @@
         <dependency>
             <groupId>com.github.ybw0014</groupId>
             <artifactId>ChineseLib</artifactId>
-            <version>0.2.3</version>
+            <version>0.3.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

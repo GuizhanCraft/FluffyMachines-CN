@@ -1,5 +1,8 @@
 package io.ncbpfluffybear.fluffymachines;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.ncbpfluffybear.fluffymachines.items.Barrel;
 import io.ncbpfluffybear.fluffymachines.items.EnderChestExtractionNode;
@@ -36,9 +39,6 @@ import io.ncbpfluffybear.fluffymachines.multiblocks.Foundry;
 import io.ncbpfluffybear.fluffymachines.multiblocks.components.GeneratorCore;
 import io.ncbpfluffybear.fluffymachines.multiblocks.components.SuperheatedFurnace;
 import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

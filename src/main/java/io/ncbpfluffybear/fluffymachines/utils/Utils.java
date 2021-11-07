@@ -2,8 +2,8 @@ package io.ncbpfluffybear.fluffymachines.utils;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
-import io.ncbpfluffybear.fluffymachines.FluffyMachines;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
+import io.ncbpfluffybear.fluffymachines.FluffyMachines;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
