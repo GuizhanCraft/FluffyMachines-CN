@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
+import io.ncbpfluffybear.fluffymachines.multiblocks.CrankGenerator;
 import io.ncbpfluffybear.fluffymachines.utils.Constants;
 import io.ncbpfluffybear.fluffymachines.utils.Events;
 import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
@@ -56,8 +57,19 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "ybw0014/FluffyMachines/master/").start();
         }
 
-        // Register Glow
+        // 读取手摇发电机设置
+        if (cfg.getBoolean("options.crank-generator.enable-rate-limit")) {
+            getLogger().info("设置已启用手摇发电机的频率限制");
+            int rate = cfg.getInt("options.crank-generator.clicks-per-second");
+            if (rate <= 0) {
+                getLogger().info("无效的数值,手摇发电机的频率限制已关闭");
+            } else {
+                getLogger().info("手摇发电机的频率限制为" + rate + "次每秒");
+                CrankGenerator.RATE_LIMIT = rate;
+            }
+        }
 
+        // Register Glow
         try {
             if (!Enchantment.isAcceptingRegistrations()) {
                 Field accepting = Enchantment.class.getDeclaredField("acceptingNew");

@@ -1,3 +1,5 @@
 options:
-  auto-update: true
-  ignore-outdated-warning: false
+  auto-update: false
+  crank-generator:
+    enable-rate-limit: false
+    clicks-per-second: 10

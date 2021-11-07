@@ -8,6 +8,7 @@ import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import net.guizhanss.minecraft.guizhanlib.common.RateLimit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,9 +24,17 @@ public class CrankGenerator extends MultiBlockMachine implements EnergyNetProvid
     public static final int RATE = 16;
     public static final int CAPACITY = 64;
 
+    public static int RATE_LIMIT = 0;
+
+    private RateLimit<Location> rateLimit;
+
     public CrankGenerator(ItemGroup category, SlimefunItemStack item) {
         super(category, item, new ItemStack[] {null, null, null, null, new ItemStack(Material.LEVER), null, null,
             FluffyItems.GENERATOR_CORE, null}, BlockFace.SELF);
+
+        if (RATE_LIMIT > 0) {
+            this.rateLimit = new RateLimit<>(1000L, RATE_LIMIT);
+        }
     }
 
     @Override
@@ -45,6 +54,10 @@ public class CrankGenerator extends MultiBlockMachine implements EnergyNetProvid
             id = BlockStorage.getLocationInfo(core.getLocation(), "id");
 
             if (id.equals("GENERATOR_CORE")) {
+                if (RATE_LIMIT > 0) {
+                    if (!this.rateLimit.add(core.getLocation()))
+                        return;
+                }
                 addCharge(core.getLocation(), RATE);
                 p.playSound(p.getLocation(), Sound.BLOCK_PISTON_EXTEND, 0.5F, 0.5F);
 
