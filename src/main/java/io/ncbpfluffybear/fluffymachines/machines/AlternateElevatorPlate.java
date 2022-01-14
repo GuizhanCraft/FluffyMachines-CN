@@ -12,6 +12,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import io.github.thebusybiscuit.slimefun4.utils.WorldUtils;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -85,7 +86,7 @@ public class AlternateElevatorPlate extends SimpleSlimefunItem<BlockUseHandler> 
     public List<Block> getFloors(@Nonnull Block b) {
         List<Block> floors = new LinkedList<>();
 
-        for (int y = b.getWorld().getMaxHeight(); y > -64; y--) {
+        for (int y = b.getWorld().getMaxHeight(); y > WorldUtils.getMinHeight(b.getWorld()); y--) {
             if (y == b.getY()) {
                 floors.add(b);
                 continue;
