@@ -89,7 +89,7 @@
                             </excludes>
                         </relocation>
                         <relocation>
-                            <pattern>net.guizhanss.minecraft.guizhanlib</pattern>
+                            <pattern>net.guizhanss.guizhanlib</pattern>
                             <shadedPattern>io.ncbpfluffybear.fluffymachines.guizhanlib</shadedPattern>
                             <excludes>
                                 <exclude>META-INF/*.MF</exclude>
@@ -113,7 +113,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.3-R0.1-SNAPSHOT</version>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -166,7 +166,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.ybw0014</groupId>
+            <groupId>net.guizhanss</groupId>
             <artifactId>ExtraUtils</artifactId>
             <version>bf89aee6ae</version>
         </dependency>
@@ -179,9 +179,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.ybw0014</groupId>
+            <groupId>net.guizhanss</groupId>
             <artifactId>GuizhanLib</artifactId>
-            <version>0.3.2</version>
+            <version>0.4.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

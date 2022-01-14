@@ -8,7 +8,7 @@ import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import net.guizhanss.minecraft.guizhanlib.common.RateLimit;
+import net.guizhanss.guizhanlib.common.RateLimit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
