@@ -1,5 +1,7 @@
 # FluffyMachines 蓬松机器
 
+**该版本是自用版本，进行了一些魔改。如需原版汉化请使用[baoad汉化版](https://github.com/baoad/FluffyMachines)。**
+
 这些是我随手做的一些机器。我添加了我能想得到的，或是别的附属不想添加的东西。
 
 可以在 `plugins/Slimefun/Items.yml` 内调整设置。
