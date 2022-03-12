@@ -2,15 +2,21 @@ package io.ncbpfluffybear.fluffymachines.utils;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.ncbpfluffybear.fluffymachines.FluffyMachines;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
+import java.util.Map;
+
+import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -30,8 +36,6 @@ public final class Utils {
     private static final NamespacedKey fluffykey = new NamespacedKey(FluffyMachines.getInstance(), "fluffykey");
     public static final DecimalFormat powerFormat = new DecimalFormat("###,###.##",
         DecimalFormatSymbols.getInstance(Locale.ROOT));
-    public static final DecimalFormat storageFormat = new DecimalFormat("###.#####",
-            DecimalFormatSymbols.getInstance(Locale.ROOT));
 
     private final static TreeMap<Integer, String> map = new TreeMap<>();
 
@@ -55,7 +59,7 @@ public final class Utils {
 
     private Utils() {}
 
-    public static void send(Player p, String message) {
+    public static void send(CommandSender p, String message) {
         p.sendMessage(ChatColor.GRAY + "[蓬松机器] " + ChatColors.color(message));
     }
 
@@ -94,6 +98,16 @@ public final class Utils {
             || b.getRelative(BlockFace.EAST).getType() == material
             || b.getRelative(BlockFace.SOUTH).getType() == material
             || b.getRelative(BlockFace.WEST).getType() == material;
+    }
+
+    public static void giveOrDropItem(Player p, ItemStack toGive) {
+        for (ItemStack leftover : p.getInventory().addItem(toGive).values()) {
+            p.getWorld().dropItemNaturally(p.getLocation(), leftover);
+        }
+    }
+
+    public static String getViewableName(ItemStack item) {
+        return ItemStackHelper.getDisplayName(item);
     }
 
     public static String toRoman(int number) {

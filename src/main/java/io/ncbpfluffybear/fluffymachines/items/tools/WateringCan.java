@@ -1,18 +1,20 @@
 package io.ncbpfluffybear.fluffymachines.items.tools;
 
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.api.items.settings.DoubleRangeSetting;
+import io.github.thebusybiscuit.slimefun4.api.items.settings.IntRangeSetting;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
+import io.ncbpfluffybear.fluffymachines.utils.CancelPlace;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.ncbpfluffybear.fluffymachines.FluffyMachines;
-import io.ncbpfluffybear.fluffymachines.utils.CancelPlace;
 import io.ncbpfluffybear.fluffymachines.utils.Constants;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
+import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -42,12 +44,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class WateringCan extends SimpleSlimefunItem<ItemUseHandler> implements CancelPlace {
 
-    public final ItemSetting<Integer> maxUses = new ItemSetting<>(this, "max-uses", 10);
-    public final ItemSetting<Double> sugarCaneSuccessChance = new ItemSetting<>(this, "sugar-cane-success-chance",
-        0.3);
-    public final ItemSetting<Double> cropSuccessChance = new ItemSetting<>(this, "crop-success-chance", 0.3);
-    public final ItemSetting<Double> treeSuccessChance = new ItemSetting<>(this, "tree-success-chance", 0.3);
-    public final ItemSetting<Double> exoticGardenSuccessChance = new ItemSetting<>(this, "exotic-garden-success-chance", 0.3);
+    public final ItemSetting<Integer> maxUses = new IntRangeSetting(this, "max-uses", 0, 10, Integer.MAX_VALUE);
+    public final ItemSetting<Double> sugarCaneSuccessChance = new DoubleRangeSetting(this, "sugar-cane-success-chance", 0, 0.3 ,1);
+    public final ItemSetting<Double> cropSuccessChance = new DoubleRangeSetting(this, "crop-success-chance", 0, 0.3, 1);
+    public final ItemSetting<Double> treeSuccessChance = new DoubleRangeSetting(this, "tree-success-chance", 0, 0.3, 1);
+    public final ItemSetting<Double> exoticGardenSuccessChance = new DoubleRangeSetting(this, "exotic-garden-success-chance", 0, 0.3, 1);
 
     private static final int USE_INDEX = 7;
     private static final int MAX_SUGAR_GROW_HEIGHT = 5;
@@ -68,11 +69,6 @@ public class WateringCan extends SimpleSlimefunItem<ItemUseHandler> implements C
     public ItemUseHandler getItemHandler() {
         return e -> {
             Player p = e.getPlayer();
-
-            if (p.getInventory().getItemInMainHand().getType() != Material.PLAYER_HEAD) {
-                Utils.send(p, "&c该物品已过期! 请手持水壶并使用 /fm replace 指令.");
-                return;
-            }
 
             if (!isItem(p.getInventory().getItemInMainHand()))
                 return;

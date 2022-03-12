@@ -136,7 +136,7 @@ public class EnderChestInsertionNode extends SlimefunItem {
                     BlockStorage.addBlockInfo(b, "owner", p.getUniqueId().toString());
                     BlockStorage.addBlockInfo(b, "playername", p.getDisplayName());
                     Utils.send(p, "&a末影箱输入节点已绑定至玩家 " + p.getDisplayName()
-                        + " &7(UUID: " + p.getUniqueId().toString() + ")");
+                        + " &7(UUID: " + p.getUniqueId() + ")");
                 }
             }
         };

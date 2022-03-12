@@ -126,9 +126,6 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
             getServer().getPluginManager().registerEvents(new McMMOEvents(), this);
         }
 
-        // 此处默认使用新版本
-        Constants.SLIMEFUN_UPDATED = true;
-
         // Registering Items
         FluffyItemSetup.setup(this);
 
@@ -144,61 +141,61 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
     }
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label,
-                             String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, String[] args) {
 
         if (args.length == 0) {
-            sender.sendMessage("蓬松机器 > 无效的指令");
+            Utils.send(sender, "&c无效的指令");
             return true;
         }
-        if (args[0].equalsIgnoreCase("replace") && sender instanceof Player) {
-            Player p = ((Player) sender);
-            ItemStack item = p.getInventory().getItemInMainHand();
-            if (SlimefunItem.getByItem(item) != null) {
-                if (SlimefunItem.getByItem(item) == FluffyItems.WATERING_CAN.getItem()) {
-                    p.getInventory().setItemInMainHand(FluffyItems.WATERING_CAN.clone());
-                }
-            }
+
+        if (!(sender instanceof Player)) {
+            Utils.send(sender, "&c只有玩家才能执行该指令");
             return true;
-        } else if (args[0].equalsIgnoreCase("debug") && sender.hasPermission("fluffymachines.admin")) {
-
-            return true;
-        } else if (args[0].equalsIgnoreCase("save") && sender.hasPermission("fluffymachines.admin")) {
-            saveAllPlayers();
-            return true;
-
-        } else if (args[0].equalsIgnoreCase("meta") && sender instanceof Player) {
-            Player p = (Player) sender;
-            Utils.send(p, String.valueOf(p.getInventory().getItemInMainHand().getItemMeta()));
-            return true;
-
-        } else if (args[0].equalsIgnoreCase("rawmeta") && sender instanceof Player) {
-            Player p = (Player) sender;
-            p.sendMessage(String.valueOf(p.getInventory().getItemInMainHand().getItemMeta()).replace("§", "&"));
-            return true;
-
-        } else if (args[0].equalsIgnoreCase("addinfo") && sender.hasPermission("fluffymachines.admin")
-            && sender instanceof Player) {
-            Player p = (Player) sender;
-
-            if (args.length != 3) {
-                Utils.send(p, "&c需要指定键和值");
-
-            } else {
-                RayTraceResult rayResult = p.rayTraceBlocks(5d);
-                if (rayResult != null && rayResult.getHitBlock() != null
-                    && BlockStorage.hasBlockInfo(rayResult.getHitBlock())) {
-
-                    BlockStorage.addBlockInfo(rayResult.getHitBlock(), args[1], args[2]);
-                    Utils.send(p, "&a信息已添加.");
-
-                } else {
-                    Utils.send(p, "&c你必须看向一个Slimefun方块");
-                }
-            }
-            return true;
-
         }
+
+        Player p = (Player) sender;
+
+        switch (args[0].toUpperCase()) {
+            case "META":
+                Utils.send(p, String.valueOf(p.getInventory().getItemInMainHand().getItemMeta()));
+                return true;
+            case "RAWMETA":
+                p.sendMessage(String.valueOf(p.getInventory().getItemInMainHand().getItemMeta()).replace("§", "&"));
+                return true;
+            case "VERSION":
+            case "V":
+                Utils.send(p, "&eThe current version is " + this.getPluginVersion());
+                return true;
+        }
+
+        if (p.hasPermission("fluffymachines.admin")) {
+            switch (args[0].toUpperCase()) {
+                case "ADDINFO":
+
+                    if (args.length != 3) {
+                        Utils.send(p, "&c需要指定键和值");
+
+                    } else {
+                        RayTraceResult rayResult = p.rayTraceBlocks(5d);
+                        if (rayResult != null && rayResult.getHitBlock() != null
+                                && BlockStorage.hasBlockInfo(rayResult.getHitBlock())) {
+
+                            BlockStorage.addBlockInfo(rayResult.getHitBlock(), args[1], args[2]);
+                            Utils.send(p, "&a信息已添加.");
+
+                        } else {
+                            Utils.send(p, "&c你必须看向一个Slimefun方块");
+                        }
+                    }
+                    return true;
+                case "SAVEPLAYERS":
+                    saveAllPlayers();
+                    return true;
+            }
+        }
+
+        Utils.send(p, "&c指令不存在");
+
         return false;
     }
 
@@ -232,7 +229,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/ybw0014/FluffyMachines-CN/issues";
+        return "https://github.com/GuizhanCraft/FluffyMachines-changed/issues";
     }
 
     @Nonnull
