@@ -1,20 +1,18 @@
 package io.ncbpfluffybear.fluffymachines;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
 import io.ncbpfluffybear.fluffymachines.multiblocks.CrankGenerator;
 import io.ncbpfluffybear.fluffymachines.utils.Constants;
 import io.ncbpfluffybear.fluffymachines.utils.Events;
-import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
 import io.ncbpfluffybear.fluffymachines.utils.GlowEnchant;
 import io.ncbpfluffybear.fluffymachines.utils.McMMOEvents;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
 import lombok.SneakyThrows;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -53,8 +51,8 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
         // Read something from your config.yml
         Config cfg = new Config(this);
 
-        if (cfg.getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-            new GitHubBuildsUpdater(this, getFile(), "ybw0014/FluffyMachines/master/").start();
+        if (cfg.getBoolean("options.auto-update") && getDescription().getVersion().startsWith("Build ")) {
+            new GuizhanBuildsUpdater(this, getFile(), "ybw0014", "FluffyMachines-CN", "master", false).start();
         }
 
         // 读取手摇发电机设置

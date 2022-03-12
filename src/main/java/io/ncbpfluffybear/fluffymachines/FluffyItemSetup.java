@@ -45,10 +45,11 @@ import io.ncbpfluffybear.fluffymachines.multiblocks.Foundry;
 import io.ncbpfluffybear.fluffymachines.multiblocks.components.GeneratorCore;
 import io.ncbpfluffybear.fluffymachines.multiblocks.components.SuperheatedFurnace;
 import io.ncbpfluffybear.fluffymachines.utils.FluffyItems;
-import javax.annotation.Nonnull;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public final class FluffyItemSetup {
 

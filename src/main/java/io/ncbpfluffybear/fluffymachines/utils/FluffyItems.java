@@ -39,7 +39,7 @@ public class FluffyItems {
             Material.BEEHIVE,
             "&e小型蓬松桶",
             "",
-            "&7可存储大量物品"
+            "&7可存储大量物品",
             "",
             "&b可存储: &e" + Barrel.SMALL_BARREL_SIZE + "个物品"
     );
