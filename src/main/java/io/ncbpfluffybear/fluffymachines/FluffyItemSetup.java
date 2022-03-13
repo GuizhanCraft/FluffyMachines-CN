@@ -75,7 +75,7 @@ public final class FluffyItemSetup {
 
     private static final ItemGroup tools = new SubItemGroup(
             new NamespacedKey(FluffyMachines.getInstance(), "tools"), fluffymachines,
-            new CustomItemStack(Material.IRON_PICKAXE, "&b工具s"), 3
+            new CustomItemStack(Material.IRON_PICKAXE, "&b工具"), 3
     );
 
     private static final ItemGroup multiblocks = new SubItemGroup(
