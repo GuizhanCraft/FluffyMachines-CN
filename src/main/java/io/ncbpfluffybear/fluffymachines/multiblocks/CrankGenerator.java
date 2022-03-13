@@ -24,17 +24,17 @@ public class CrankGenerator extends MultiBlockMachine implements EnergyNetProvid
     public static final int RATE = 16;
     public static final int CAPACITY = 64;
 
-    public static int RATE_LIMIT = 0;
-
-    private RateLimit<Location> rateLimit;
+    private static int rateLimit = 0;
+    private static RateLimit<Location> rateLimitMap;
 
     public CrankGenerator(ItemGroup category, SlimefunItemStack item) {
         super(category, item, new ItemStack[] {null, null, null, null, new ItemStack(Material.LEVER), null, null,
             FluffyItems.GENERATOR_CORE, null}, BlockFace.SELF);
+    }
 
-        if (RATE_LIMIT > 0) {
-            this.rateLimit = new RateLimit<>(1000L, RATE_LIMIT);
-        }
+    public static void setRateLimit(int value) {
+        rateLimit = value;
+        rateLimitMap = new RateLimit<>(1000L, rateLimit);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class CrankGenerator extends MultiBlockMachine implements EnergyNetProvid
             id = BlockStorage.getLocationInfo(core.getLocation(), "id");
 
             if (id.equals("GENERATOR_CORE")) {
-                if (RATE_LIMIT > 0) {
-                    if (!this.rateLimit.add(core.getLocation()))
+                if (rateLimit > 0) {
+                    if (!rateLimitMap.add(core.getLocation()))
                         return;
                 }
                 addCharge(core.getLocation(), RATE);

@@ -63,7 +63,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
                 getLogger().info("无效的数值,手摇发电机的频率限制已关闭");
             } else {
                 getLogger().info("手摇发电机的频率限制为" + rate + "次每秒");
-                CrankGenerator.RATE_LIMIT = rate;
+                CrankGenerator.setRateLimit(rate);
             }
         }
 
