@@ -1,5 +1,5 @@
 options:
-  auto-update: false
+  auto-update: true
   crank-generator:
     enable-rate-limit: false
     clicks-per-second: 10
