@@ -300,8 +300,7 @@ public class FluffyItems {
             "&c过热熔炉",
             "",
             "&7多方块结构铸造厂的部件",
-            "&c只能用于铸造厂",
-            "&c不要使用爆炸工具破坏!"
+            "&c只能用于铸造厂"
     );
     public static final SlimefunItemStack AUTO_MAGIC_WORKBENCH = new SlimefunItemStack("AUTO_MAGIC_WORKBENCH",
             Material.BOOKSHELF,
