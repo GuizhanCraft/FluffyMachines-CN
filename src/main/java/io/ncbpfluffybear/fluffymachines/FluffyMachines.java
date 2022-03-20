@@ -10,6 +10,15 @@ import io.ncbpfluffybear.fluffymachines.utils.Events;
 import io.ncbpfluffybear.fluffymachines.utils.GlowEnchant;
 import io.ncbpfluffybear.fluffymachines.utils.McMMOEvents;
 import io.ncbpfluffybear.fluffymachines.utils.Utils;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import javax.annotation.Nonnull;
 import lombok.SneakyThrows;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
@@ -27,22 +36,12 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.RayTraceResult;
 
-import javax.annotation.Nonnull;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-
 public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
 
     private static FluffyMachines instance;
     public static final HashMap<ItemStack, List<Pair<ItemStack, List<RecipeChoice>>>> shapedVanillaRecipes = new HashMap<>();
     public static final HashMap<ItemStack, List<Pair<ItemStack, List<RecipeChoice>>>> shapelessVanillaRecipes =
-        new HashMap<>();
+            new HashMap<>();
 
     @SneakyThrows
     @Override
@@ -99,8 +98,8 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
 
                 if (!shapedVanillaRecipes.containsKey(key)) {
                     shapedVanillaRecipes.put(key,
-                        new ArrayList<>(Collections.singletonList(new Pair<>(sr.getResult(), rc))));
-                }else {
+                            new ArrayList<>(Collections.singletonList(new Pair<>(sr.getResult(), rc))));
+                } else {
                     shapedVanillaRecipes.get(key).add(new Pair<>(sr.getResult(), rc));
                 }
 
@@ -111,7 +110,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
                 // Key has a list of recipe options
                 if (!shapelessVanillaRecipes.containsKey(key)) {
                     shapelessVanillaRecipes.put(key,
-                        new ArrayList<>(Collections.singletonList(new Pair<>(slr.getResult(), slr.getChoiceList()))));
+                            new ArrayList<>(Collections.singletonList(new Pair<>(slr.getResult(), slr.getChoiceList()))));
                 } else {
                     shapelessVanillaRecipes.get(key).add(new Pair<>(slr.getResult(), slr.getChoiceList()));
                 }
@@ -214,9 +213,9 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
     }
 
     private void registerGlow() {
-        Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
-            "SMALL_PORTABLE_CHARGER", "MEDIUM_PORTABLE_CHARGER", "BIG_PORTABLE_CHARGER",
-            "LARGE_PORTABLE_CHARGER", "CARBONADO_PORTABLE_CHARGER", "PAXEL"
+        Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[]{
+                "SMALL_PORTABLE_CHARGER", "MEDIUM_PORTABLE_CHARGER", "BIG_PORTABLE_CHARGER",
+                "LARGE_PORTABLE_CHARGER", "CARBONADO_PORTABLE_CHARGER", "PAXEL"
         });
 
         // Prevent double-registration errors
@@ -227,7 +226,7 @@ public class FluffyMachines extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/GuizhanCraft/FluffyMachines-changed/issues";
+        return "https://github.com/GuizhanCraft/FluffyMachines-modified/issues";
     }
 
     @Nonnull
