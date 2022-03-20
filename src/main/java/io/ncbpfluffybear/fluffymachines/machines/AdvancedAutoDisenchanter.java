@@ -321,14 +321,13 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
                 textColor = ChatColor.GREEN;
             }
 
-            StringBuilder builder = new StringBuilder();
-            builder.append(textColor);
-            builder.append("- ");
-            builder.append(EnchantmentHelper.getEnchantmentName(disenchantKeys[i]));
-            builder.append(" ");
-            builder.append(Utils.toRoman(disenchants.get(disenchantKeys[i])));
+            String ench = textColor +
+                "- " +
+                EnchantmentHelper.getEnchantmentName(disenchantKeys[i]) +
+                " " +
+                Utils.toRoman(disenchants.get(disenchantKeys[i]));
 
-            lore.add(builder.toString());
+            lore.add(ench);
         }
 
         setSelectionItem(menu, lore);
