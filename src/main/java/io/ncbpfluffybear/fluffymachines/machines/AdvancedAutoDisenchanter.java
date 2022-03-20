@@ -29,6 +29,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
+import net.guizhanss.guizhanlib.minecraft.helper.enchantments.EnchantmentHelper;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -255,9 +256,9 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
         List<String> lore = new ArrayList<>();
 
         if (inv.getItemInSlot(ITEM_SLOT) == null) {
-            lore.add(Utils.color("&cPlace an item into the item slot first"));
+            lore.add(Utils.color("&c需要放入物品"));
             lore.add("");
-            lore.add(Utils.color("&e> Click to rescan input slot <"));
+            lore.add(Utils.color("&e> 点击重新检测 <"));
             setSelectionItem(inv, lore);
             setSelectedIndex(b, -2);
             return;
@@ -265,9 +266,9 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
 
         // Can't disenchant item
         if (itemEnchants.isEmpty()) {
-            lore.add(Utils.color("&cThis item has no available disenchants!"));
+            lore.add(Utils.color("&c该物品没有可用附魔!"));
             lore.add("");
-            lore.add(Utils.color("&e> Click to rescan input slot <"));
+            lore.add(Utils.color("&e> 点击重新检测 <"));
             setSelectionItem(inv, lore);
             setSelectedIndex(b, -2);
             return;
@@ -320,10 +321,14 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
                 textColor = ChatColor.GREEN;
             }
 
-            lore.add(textColor + WordUtils.capitalizeFully("- " + disenchantKeys[i].getKey()
-                    .getKey().replace('_', ' ')) + " "
-                    + Utils.toRoman(disenchants.get(disenchantKeys[i]))
-            );
+            StringBuilder builder = new StringBuilder();
+            builder.append(textColor);
+            builder.append("- ");
+            builder.append(EnchantmentHelper.getEnchantmentName(disenchantKeys[i]));
+            builder.append(" ");
+            builder.append(Utils.toRoman(disenchants.get(disenchantKeys[i])));
+
+            lore.add(builder.toString());
         }
 
         setSelectionItem(menu, lore);
@@ -363,7 +368,7 @@ public class AdvancedAutoDisenchanter extends SlimefunItem implements EnergyNetC
         ItemStack selectionItem = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta itemMeta = selectionItem.getItemMeta();
 
-        itemMeta.setDisplayName(Utils.color("&5Enchant Selector"));
+        itemMeta.setDisplayName(Utils.color("&5附魔选择"));
         itemMeta.setLore(lore);
         selectionItem.setItemMeta(itemMeta);
 
