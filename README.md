@@ -1,6 +1,6 @@
 # FluffyMachines 蓬松机器
 
-**该版本对插件进行了一些魔改。如需原版汉化请使用 [baoad汉化版](https://github.com/baoad/FluffyMachines)**
+**魔改内容已合并至 [baoad汉化版](https://github.com/baoad/FluffyMachines)**
 
 这些是我随手做的一些机器。我添加了我能想得到的，或是别的附属不想添加的东西。
 
